@@ -85,6 +85,10 @@ public class ContainerScheduler extends AbstractService implements
   private final LinkedHashMap<ContainerId, Container>
       queuedOpportunisticContainers = new LinkedHashMap<>();
 
+  private final ContainerStarter containerStarter = new ContainerStarter();
+
+  private final ContainerQueueManager containerQueueManager = new ContainerQueueManager();
+
   // Used to keep track of containers that have been marked to be killed
   // or paused to make room for a guaranteed container.
   private final Map<ContainerId, Container> oppContainersToKill =
@@ -563,8 +567,9 @@ public class ContainerScheduler extends AbstractService implements
       // When opportunistic container not allowed (which is determined by
       // max-queue length of pending opportunistic containers <= 0), start
       // guaranteed containers without looking at available resources.
-      startPendingContainers(forceStartGuaranteedContainers);
-
+//      startPendingContainers(forceStartGuaranteedContainers);
+      containerStarter.startPendingContainers(forceStartGuaranteedContainers,
+          containerQueueManager, utilizationTracker, metrics);
       // if the guaranteed container is queued, we need to preempt opportunistic
       // containers for make room for it
       if (queuedGuaranteedContainers.containsKey(container.getContainerId())) {
