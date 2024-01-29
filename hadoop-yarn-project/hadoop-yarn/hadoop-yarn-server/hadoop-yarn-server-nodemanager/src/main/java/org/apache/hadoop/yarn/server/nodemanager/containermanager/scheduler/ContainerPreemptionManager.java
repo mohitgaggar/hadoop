@@ -57,6 +57,14 @@ public class ContainerPreemptionManager {
 
   private final ResourceUtilizationTracker utilizationTracker;
 
+  /**
+   * Instantiate an object of ContainerPreemptionManager.
+   *
+   * @param containerQueueManager
+   * @param runningContainersManager
+   * @param context
+   * @param utilizationTracker
+   */
   public ContainerPreemptionManager(ContainerQueueManager containerQueueManager,
       RunningContainersManager runningContainersManager, Context context,
       ResourceUtilizationTracker utilizationTracker) {

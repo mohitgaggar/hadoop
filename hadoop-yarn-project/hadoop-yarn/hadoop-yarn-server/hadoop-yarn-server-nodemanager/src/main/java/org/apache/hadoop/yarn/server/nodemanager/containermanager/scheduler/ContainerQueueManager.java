@@ -64,6 +64,15 @@ public class ContainerQueueManager {
 
   private final NodeManagerMetrics metrics;
 
+  /**
+   * Instantiate a new object of ContainerQueueManager
+   *
+   * @param oppContainersQueuePolicy
+   * @param qLength
+   * @param utilizationTracker
+   * @param metrics
+   * @param context
+   */
   public ContainerQueueManager(
       OpportunisticContainersQueuePolicy oppContainersQueuePolicy, int qLength,
       ResourceUtilizationTracker utilizationTracker, NodeManagerMetrics metrics,

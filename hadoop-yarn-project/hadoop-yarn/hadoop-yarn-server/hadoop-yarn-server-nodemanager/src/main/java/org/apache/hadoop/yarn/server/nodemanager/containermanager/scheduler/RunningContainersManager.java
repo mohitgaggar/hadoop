@@ -25,7 +25,11 @@ import org.apache.hadoop.yarn.util.SystemClock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 /**
  * RunningContainersManager is responsible for starting containers on the node and also
@@ -49,12 +53,22 @@ public class RunningContainersManager {
 
   private final NodeManagerMetrics metrics;
 
+  /**
+   * Instantiate an object of RunningContainersManager
+   *
+   * @param utilizationTracker
+   * @param metrics
+   */
   public RunningContainersManager(ResourceUtilizationTracker utilizationTracker,
       NodeManagerMetrics metrics) {
     this.utilizationTracker = utilizationTracker;
     this.metrics = metrics;
   }
 
+  /**
+   * Get all running containers on the node
+   * @return LinkedHashMap containing running containers mapped by ContainerId
+   */
   public LinkedHashMap<ContainerId, Container> getRunningContainers() {
     return runningContainers;
   }
